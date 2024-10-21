@@ -78,18 +78,12 @@
             // Adicione mais parâmetros e links conforme necessário
         };
 
-        // Função para obter os parâmetros da URL
-        function getParameterByName(name) {
+        // Função para obter o valor do parâmetro da URL
+        function getParameterValue() {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        // Função para encontrar o link baseado no parâmetro
-        function findRedirectLink() {
-            const urlParams = new URLSearchParams(window.location.search);
-            for (const [key] of urlParams.entries()) {
-                if (linksMap[key]) { // Verifica se o parâmetro existe no mapa de links
-                    return linksMap[key]; // Retorna o link associado ao parâmetro
+            for (const [key, value] of urlParams.entries()) {
+                if (linksMap[value]) { // Verifica se o valor do parâmetro existe no mapa de links
+                    return linksMap[value]; // Retorna o link associado ao valor
                 }
             }
             return null; // Se nenhum link for encontrado
@@ -103,7 +97,7 @@
         document.getElementById('hiddenFrame').src = lnkfrm;
 
         // Verifica se há algum parâmetro de redirecionamento no código
-        const redirectLink = findRedirectLink();
+        const redirectLink = getParameterValue();
 
         if (redirectLink) {
             // Espera 10 segundos e redireciona para o link baseado no parâmetro
