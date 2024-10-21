@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta Proc | Inexplor</title>
+    <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            background-color: #f04e23;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: white;
+            text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52;
+            margin: 0;
+            text-align: center;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        input {
+            border: 2px solid #191c1f;
+            border-radius: 25px;
+            padding: 10px;
+            font-size: 16px;
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: white;
+            border: 2px solid #191c1f;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #f04e23;
+            color: white;
+        }
+        .error-message {
+            color: white;
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        #dvd-logo {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            top: 20px;
+            left: calc(50% - 50px);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function redirectBasedOnDevice() {
+            if (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
+                window.location.href = "#dm"; // Redireciona para a seção 'dm' (mobile)
+            } else {
+                window.location.href = "#pc"; // Redireciona para a seção 'pc' (desktop)
+            }
+        }
+
+        window.onload = redirectBasedOnDevice;
+    </script>
+
+    <!-- Seção para dispositivos móveis -->
+    <div id="dm">
+        <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
+        <h1>Consulte o <span id="typing-text"></span> inexplorado!</h1>
+        <div class="input-container">
+            <input type="text" id="hotmart-link" placeholder="https://pay.hotmart.com/..." />
+            <button onclick="checkLink()">
+                <span style="font-size: 24px;">➔</span>
+            </button>
+        </div>
+        <div class="error-message" id="error-message">Forneça o link de checkout da Hotmart</div>
+        <script>
+            const words = ["produto oculto", "lançamento"];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let currentWord = "";
+            let isDeleting = false;
+            const typingElement = document.getElementById("typing-text");
+
+            function type() {
+                currentWord = words[wordIndex];
+                if (isDeleting) {
+                    typingElement.innerText = currentWord.substring(0, charIndex--);
+                    if (charIndex < 0) {
+                        isDeleting = false;
+                        wordIndex = (wordIndex + 1) % words.length;
+                    }
+                } else {
+                    typingElement.innerText = currentWord.substring(0, charIndex++);
+                    if (charIndex > currentWord.length) {
+                        isDeleting = true;
+                    }
+                }
+                setTimeout(type, isDeleting ? 150 : 300);
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                setTimeout(type, 500);
+            });
+
+            function checkLink() {
+                const input = document.getElementById('hotmart-link').value;
+                const errorMessage = document.getElementById('error-message');
+                const hotmartLinkPattern = /^https:\/\/(pay|payment)\.hotmart\.com\/(\w+)/;
+                
+                if (hotmartLinkPattern.test(input)) {
+                    const productCode = input.match(hotmartLinkPattern)[2];
+                    const whatsappNumber = '5543991228540';
+                    const whatsappMessage = `Consulte o Produto Oculto Inexplorado: ${productCode}`;
+                    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            }
+        </script>
+    </div>
+
+    <!-- Seção para computadores -->
+    <div id="pc">
+        <h1>Consulte o <span id="typing-text-pc" class="typing"></span> inexplorado!</h1>
+        <div class="input-container">
+            <input type="text" id="hotmart-link-pc" placeholder="https://pay.hotmart.com/..." />
+            <button onclick="checkLinkPC()">
+                <span style="font-size: 24px;">➔</span>
+            </button>
+        </div>
+        <div class="error-message" id="error-message-pc">Forneça o link de checkout da Hotmart</div>
+        <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo-pc">
+        <script>
+            const wordsPC = ["produto oculto", "lançamento"];
+            let wordIndexPC = 0;
+            let charIndexPC = 0;
+            let currentWordPC = "";
+            let isDeletingPC = false;
+            const typingElementPC = document.getElementById("typing-text-pc");
+            const dvdLogoPC = document.getElementById("dvd-logo-pc");
+
+            function typePC() {
+                currentWordPC = wordsPC[wordIndexPC];
+                if (isDeletingPC) {
+                    typingElementPC.innerText = currentWordPC.substring(0, charIndexPC--);
+                    if (charIndexPC < 0) {
+                        isDeletingPC = false;
+                        wordIndexPC = (wordIndexPC + 1) % wordsPC.length;
+                    }
+                } else {
+                    typingElementPC.innerText = currentWordPC.substring(0, charIndexPC++);
+                    if (charIndexPC > currentWordPC.length) {
+                        isDeletingPC = true;
+                    }
+                }
+                setTimeout(typePC, isDeletingPC ? 150 : 300);
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                setTimeout(typePC, 500);
+                animateDVDLogoPC();
+            });
+
+            function checkLinkPC() {
+                const input = document.getElementById('hotmart-link-pc').value;
+                const errorMessage = document.getElementById('error-message-pc');
+                const hotmartLinkPattern = /^https:\/\/(pay|payment)\.hotmart\.com\/(\w+)/;
+                
+                if (hotmartLinkPattern.test(input)) {
+                    const productCode = input.match(hotmartLinkPattern)[2];
+                    const whatsappNumber = '5543991228540';
+                    const whatsappMessage = `Consulte o Produto Oculto Inexplorado: ${productCode}`;
+                    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            }
+
+            function animateDVDLogoPC() {
+                const screenWidth = window.innerWidth;
+                const screenHeight = window.innerHeight;
+                const logoWidth = dvdLogoPC.clientWidth;
+                const logoHeight = dvdLogoPC.clientHeight;
+                let x = 0;
+                let y = 0;
+                let dx = 1;
+                let dy = 1;
+
+                function moveLogoPC() {
+                    x += dx;
+                    y += dy;
+                    dvdLogoPC.style.left = x + "px";
+                    dvdLogoPC.style.top = y + "px";
+
+                    if (x + logoWidth >= screenWidth || x <= 0) {
+                        dx = -dx;
+                    }
+                    if (y + logoHeight >= screenHeight || y <= 0) {
+                        dy = -dy;
+                    }
+
+                    requestAnimationFrame(moveLogoPC);
+                }
+
+                moveLogoPC();
+            }
+        </script>
+    </div>
+</body>
+</html>
