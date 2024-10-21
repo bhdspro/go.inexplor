@@ -69,15 +69,18 @@
             left: calc(50% - 50px);
             z-index: 1;
         }
+        #dm, #pc {
+            display: none; /* Oculta ambas as seções por padrão */
+        }
     </style>
 </head>
 <body>
     <script>
         function redirectBasedOnDevice() {
             if (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
-                window.location.href = "#dm"; // Redireciona para a seção 'dm' (mobile)
+                document.getElementById('dm').style.display = 'block'; // Mostra a seção 'dm' (mobile)
             } else {
-                window.location.href = "#pc"; // Redireciona para a seção 'pc' (desktop)
+                document.getElementById('pc').style.display = 'block'; // Mostra a seção 'pc' (desktop)
             }
         }
 
