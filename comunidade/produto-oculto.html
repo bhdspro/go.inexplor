@@ -78,12 +78,13 @@
             // Adicione mais parâmetros e links conforme necessário
         };
 
-        // Função para obter o valor do parâmetro da URL
+        // Função para obter o valor do parâmetro com nome completo da URL
         function getParameterValue() {
             const urlParams = new URLSearchParams(window.location.search);
             for (const [key, value] of urlParams.entries()) {
-                if (linksMap[value]) { // Verifica se o valor do parâmetro existe no mapa de links
-                    return linksMap[value]; // Retorna o link associado ao valor
+                console.log('Parâmetro:', key, 'Valor:', value); // Log para verificar o parâmetro capturado
+                if (linksMap[key]) { // Verifica se o nome completo do parâmetro existe no mapa de links
+                    return linksMap[key]; // Retorna o link associado ao parâmetro
                 }
             }
             return null; // Se nenhum link for encontrado
@@ -100,11 +101,13 @@
         const redirectLink = getParameterValue();
 
         if (redirectLink) {
+            console.log('Redirecionando para:', redirectLink); // Verificar o link de redirecionamento
             // Espera 10 segundos e redireciona para o link baseado no parâmetro
             setTimeout(function() {
                 window.location.href = redirectLink;
             }, 10000); // 10 segundos
         } else {
+            console.log('Nenhum parâmetro correspondente, redirecionando para:', lnkdtn); // Log para link padrão
             // Espera 10 segundos e redireciona para o link padrão
             setTimeout(function() {
                 window.location.href = lnkdtn;
