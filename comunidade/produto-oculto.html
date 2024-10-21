@@ -23,10 +23,10 @@
         .circle {
             width: 30px;
             height: 30px;
-            border: 4px solid green; /* Borda verde ao redor */
-            border-top: 4px solid transparent; /* Parte superior transparente para criar o efeito de carregamento */
-            border-radius: 50%; /* Faz com que seja um círculo */
-            animation: spin 1s linear infinite; /* Animação de rotação */
+            border: 4px solid green;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
             margin-right: 10px;
         }
 
@@ -40,19 +40,18 @@
             color: black;
         }
 
-        /* Media query para dispositivos móveis */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column; /* Coloca o círculo acima do texto */
+                flex-direction: column;
             }
 
             .circle {
-                margin-right: 0; /* Remove o espaço lateral */
-                margin-bottom: 10px; /* Adiciona espaço abaixo do círculo */
+                margin-right: 0;
+                margin-bottom: 10px;
             }
 
             .text {
-                font-size: 24px; /* Ajusta o tamanho da fonte para mobile */
+                font-size: 24px;
                 text-align: center;
             }
         }
@@ -71,20 +70,20 @@
     <script>
         // Definindo os links relacionados aos parâmetros
         const linksMap = {
-            92049: "https://app.hotmart.com/products/view/21bd9913-9de6-4fc2-a52d-09a47b870f40?inp=nyGodTkMRFGtprgEFkzNngTGfwzpDBw1",
+            produto2437: "inexplor.com/produto2437",
+            2437: "inexplor.com/2437",
+            a2437: "inexplor.com/a2437",
             parametro1: "https://google.com",
             parametro2: "https://instagram.com",
             parametro3: "https://facebook.com"
-            // Adicione mais parâmetros e links conforme necessário
         };
 
-        // Função para obter o valor do parâmetro com nome completo da URL
+        // Função para obter o valor do parâmetro na URL
         function getParameterValue() {
             const urlParams = new URLSearchParams(window.location.search);
-            for (const [key, value] of urlParams.entries()) {
-                console.log('Parâmetro:', key, 'Valor:', value); // Log para verificar o parâmetro capturado
-                if (linksMap[key]) { // Verifica se o nome completo do parâmetro existe no mapa de links
-                    return linksMap[key]; // Retorna o link associado ao parâmetro
+            for (const [key] of urlParams.entries()) {
+                if (linksMap[key]) { // Verifica se o parâmetro existe no mapa
+                    return linksMap[key]; // Retorna o link correspondente
                 }
             }
             return null; // Se nenhum link for encontrado
@@ -101,14 +100,12 @@
         const redirectLink = getParameterValue();
 
         if (redirectLink) {
-            console.log('Redirecionando para:', redirectLink); // Verificar o link de redirecionamento
             // Espera 10 segundos e redireciona para o link baseado no parâmetro
             setTimeout(function() {
                 window.location.href = redirectLink;
             }, 10000); // 10 segundos
         } else {
-            console.log('Nenhum parâmetro correspondente, redirecionando para:', lnkdtn); // Log para link padrão
-            // Espera 10 segundos e redireciona para o link padrão
+            // Se o parâmetro não existir, redireciona para o link padrão
             setTimeout(function() {
                 window.location.href = lnkdtn;
             }, 10000); // 10 segundos
