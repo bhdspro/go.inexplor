@@ -77,10 +77,14 @@
 <body>
     <script>
         function redirectBasedOnDevice() {
-            if (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
-                document.getElementById('dm').style.display = 'block'; // Mostra a seção 'dm' (mobile)
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
+            const dmSection = document.getElementById('dm');
+            const pcSection = document.getElementById('pc');
+            
+            if (isMobile) {
+                dmSection.style.display = 'block'; // Mostra a seção mobile
             } else {
-                document.getElementById('pc').style.display = 'block'; // Mostra a seção 'pc' (desktop)
+                pcSection.style.display = 'block'; // Mostra a seção desktop
             }
         }
 
@@ -185,7 +189,6 @@
 
             document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(typePC, 500);
-                animateDVDLogoPC();
             });
 
             function checkLinkPC() {
@@ -203,35 +206,6 @@
                 } else {
                     errorMessage.style.display = 'block';
                 }
-            }
-
-            function animateDVDLogoPC() {
-                const screenWidth = window.innerWidth;
-                const screenHeight = window.innerHeight;
-                const logoWidth = dvdLogoPC.clientWidth;
-                const logoHeight = dvdLogoPC.clientHeight;
-                let x = 0;
-                let y = 0;
-                let dx = 1;
-                let dy = 1;
-
-                function moveLogoPC() {
-                    x += dx;
-                    y += dy;
-                    dvdLogoPC.style.left = x + "px";
-                    dvdLogoPC.style.top = y + "px";
-
-                    if (x + logoWidth >= screenWidth || x <= 0) {
-                        dx = -dx;
-                    }
-                    if (y + logoHeight >= screenHeight || y <= 0) {
-                        dy = -dy;
-                    }
-
-                    requestAnimationFrame(moveLogoPC);
-                }
-
-                moveLogoPC();
             }
         </script>
     </div>
