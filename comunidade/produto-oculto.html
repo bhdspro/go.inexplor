@@ -23,10 +23,10 @@
         .circle {
             width: 30px;
             height: 30px;
-            border: 4px solid green;
-            border-top: 4px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            border: 4px solid green; /* Borda verde ao redor */
+            border-top: 4px solid transparent; /* Parte superior transparente para criar o efeito de carregamento */
+            border-radius: 50%; /* Faz com que seja um círculo */
+            animation: spin 1s linear infinite; /* Animação de rotação */
             margin-right: 10px;
         }
 
@@ -40,18 +40,19 @@
             color: black;
         }
 
+        /* Media query para dispositivos móveis */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column;
+                flex-direction: column; /* Coloca o círculo acima do texto */
             }
 
             .circle {
-                margin-right: 0;
-                margin-bottom: 10px;
+                margin-right: 0; /* Remove o espaço lateral */
+                margin-bottom: 10px; /* Adiciona espaço abaixo do círculo */
             }
 
             .text {
-                font-size: 24px;
+                font-size: 24px; /* Ajusta o tamanho da fonte para mobile */
                 text-align: center;
             }
         }
@@ -70,19 +71,25 @@
     <script>
         // Definindo os links relacionados aos parâmetros
         const linksMap = {
+            02023: "https://app.hotmart.com/products/view/21bd9913-9de6-4fc2-a52d-09a47b870f40?inp=nyGodTkMRFGtprgEFkzNngTGfwzpDBw1",
+            30902: "https://app.hotmart.com/products/view/0dc14ab8-8f3b-42e7-8063-7209db99e854?inp=JGZKseLxygrqQwBzRMqQCdTxeR4Wxl5T",
+            02904: "https://app.hotmart.com/products/view/d75ff7cc-880c-4590-8c2f-d5fdfee08418?inp=zCrozcTb6swhrhE2NF5NS9m9cJwmhOEp",
             inp: "https://inexplor.com"
-            02922: "https://app.hotmart.com/products/view/21bd9913-9de6-4fc2-a52d-09a47b870f40?inp=nyGodTkMRFGtprgEFkzNngTGfwzpDBw1",
-            04934: "https://app.hotmart.com/products/view/0dc14ab8-8f3b-42e7-8063-7209db99e854?inp=JGZKseLxygrqQwBzRMqQCdTxeR4Wxl5T",
-            42942: "https://app.hotmart.com/products/view/d75ff7cc-880c-4590-8c2f-d5fdfee08418?inp=zCrozcTb6swhrhE2NF5NS9m9cJwmhOEp",
-            inp: "https://inexplor.com"
+            // Adicione mais parâmetros e links conforme necessário
         };
 
-        // Função para obter o valor do parâmetro na URL
-        function getParameterValue() {
+        // Função para obter os parâmetros da URL
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Função para encontrar o link baseado no parâmetro
+        function findRedirectLink() {
             const urlParams = new URLSearchParams(window.location.search);
             for (const [key] of urlParams.entries()) {
-                if (linksMap[key]) { // Verifica se o parâmetro existe no mapa
-                    return linksMap[key]; // Retorna o link correspondente
+                if (linksMap[key]) { // Verifica se o parâmetro existe no mapa de links
+                    return linksMap[key]; // Retorna o link associado ao parâmetro
                 }
             }
             return null; // Se nenhum link for encontrado
@@ -96,7 +103,7 @@
         document.getElementById('hiddenFrame').src = lnkfrm;
 
         // Verifica se há algum parâmetro de redirecionamento no código
-        const redirectLink = getParameterValue();
+        const redirectLink = findRedirectLink();
 
         if (redirectLink) {
             // Espera 10 segundos e redireciona para o link baseado no parâmetro
@@ -104,7 +111,7 @@
                 window.location.href = redirectLink;
             }, 10000); // 10 segundos
         } else {
-            // Se o parâmetro não existir, redireciona para o link padrão
+            // Espera 10 segundos e redireciona para o link padrão
             setTimeout(function() {
                 window.location.href = lnkdtn;
             }, 10000); // 10 segundos
