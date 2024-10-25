@@ -18,12 +18,20 @@
     return 'desktop';
   }
 
+  // Função para verificar se já foi redirecionado
+  function checkRedirect() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.has('redirected');
+  }
+
   // Redirecionamento baseado no tipo de dispositivo
   var deviceType = getDeviceType();
 
-  if (deviceType === 'mobile') {
-    window.location.href = "https://go.inexplor.com/proc?dm";
-  } else if (deviceType === 'desktop') {
-    window.location.href = "https://go.inexplor.com/proc?pc";
+  if (!checkRedirect()) {
+    if (deviceType === 'mobile') {
+      window.location.href = "https://go.inexplor.com/proc?dm&redirected=true";
+    } else if (deviceType === 'desktop') {
+      window.location.href = "https://go.inexplor.com/proc?pc&redirected=true";
+    }
   }
 </script>
