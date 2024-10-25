@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Configuração do documento e importação de estilos e fontes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultoria Inexplor</title>
+    
+    <!-- Ícone da aba do navegador -->
     <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
+    
+    <!-- Estilos internos para aparência e layout da página -->
     <style>
+        /* Fonte importada do Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        
+        /* Estilo do corpo da página */
         body {
-            background-color: #ff0000;
+            background-color: #ff0000; /* Cor de fundo vermelha */
             font-family: 'Roboto', sans-serif;
             display: flex;
             flex-direction: column;
@@ -16,31 +24,39 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: white;
+            color: white; /* Texto em branco */
             overflow: hidden;
             position: relative;
         }
+
+        /* Estilo do título principal */
         h1 {
             color: white;
-            text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52;
+            text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52; /* Sombra */
             margin-bottom: 10px;
             margin-top: 0;
             display: flex;
             align-items: center;
         }
+
+        /* Efeito de digitação */
         .typing {
             border-right: 2px solid #191c1f;
             white-space: nowrap;
             overflow: hidden;
             display: inline-block;
-            animation: blink-caret 0.75s step-end infinite;
+            animation: blink-caret 0.75s step-end infinite; /* Animação de piscar */
             margin: 0 5px;
         }
+
+        /* Animação de piscar */
         @keyframes blink-caret {
             50% {
                 border-color: transparent;
             }
         }
+
+        /* Container do input e botão */
         .input-container {
             display: flex;
             align-items: center;
@@ -48,6 +64,8 @@
             margin-top: 10px;
             width: 100%;
         }
+
+        /* Estilo do campo de input */
         input {
             border: 2px solid #191c1f;
             border-radius: 25px;
@@ -57,6 +75,8 @@
             max-width: 500px;
             margin-right: 10px;
         }
+
+        /* Estilo do botão */
         button {
             background-color: white;
             border: 2px solid #191c1f;
@@ -68,23 +88,31 @@
             align-items: center;
             cursor: pointer;
         }
+
+        /* Mudança de cor ao passar o mouse sobre o botão */
         button:hover {
             background-color: #ff0000;
             color: white;
         }
+
+        /* Mensagem de erro */
         .error-message {
             color: white;
             margin-top: 10px;
             font-weight: bold;
-            display: none;
+            display: none; /* Oculta inicialmente */
         }
+
+        /* Container para botões personalizados */
         .button-container {
             display: flex;
             gap: 10px;
             margin-top: 40px;
         }
+
+        /* Botões personalizados para ações adicionais */
         .custom-button {
-            background-color: #32cd32;
+            background-color: #f04e23;
             border: 2px solid white;
             border-radius: 25px;
             padding: 10px 20px;
@@ -95,35 +123,47 @@
             display: inline-block;
             cursor: pointer;
         }
+
+        /* Mudança de cor ao passar o mouse sobre o botão personalizado */
         .custom-button:hover {
-            background-color: #28a428;
+            background-color: #ff0000;
         }
+
+        /* Estilo e posição do logotipo */
         #dvd-logo {
             position: absolute;
             width: 100px;
             height: auto;
-            pointer-events: none;
+            pointer-events: none; /* Desativa interações com o mouse */
         }
     </style>
 </head>
 <body>
+    <!-- Título com efeito de digitação -->
     <h1>🔥 Afilie-se ao <span id="typing-text" class="typing"></span> oculto da Hotmart</h1>
+    
+    <!-- Campo de input e botão de verificação -->
     <div class="input-container">
         <input type="text" id="hotmart-link" placeholder="🌐 Cole o link da página de pagamento da Hotmart que você copiou" />
         <button onclick="checkLink()">
             <span style="font-size: 24px;">➔</span>
         </button>
     </div>
+    
+    <!-- Mensagem de erro, inicialmente oculta -->
     <div class="error-message" id="error-message">🚨 Ops! O link correto deve começar com https://pay.hotmart.com/...</div>
 
-    <!-- Container dos botões -->
+    <!-- Container para botões adicionais -->
     <div class="button-container">
         <a href="https://inexplor.com" target="_blank" class="custom-button">Quero +135 Produtos Ocultos</a>
-        <a href="https://api.whatsapp.com/send?phone=5543991228540&text=Ol%C3%A1%2C%20quero%20ajuda%20sobre%20a%20Ferramenta%20PROC" target="_blank" class="custom-button">Preciso de Ajuda!</a>
+        <a href="https://api.whatsapp.com/send?phone=5543991228540&text=Ol%C3%A1%2C%20quero%20ajuda%20sobre%20a%20Ferramenta%20PROC" target="_blank" class="custom-button">Quero Ajuda sobre a Ferramenta</a>
     </div>
 
+    <!-- Logotipo que se move na tela -->
     <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
+    
     <script>
+        /* Texto para o efeito de digitação */
         const words = ["produto", "lançamento"];
         let wordIndex = 0;
         let charIndex = 0;
@@ -132,6 +172,7 @@
         const typingElement = document.getElementById("typing-text");
         const dvdLogo = document.getElementById("dvd-logo");
 
+        /* Função de digitação e apagamento do texto */
         function type() {
             currentWord = words[wordIndex];
             if (isDeleting) {
@@ -149,6 +190,7 @@
             setTimeout(type, isDeleting ? 150 : 300);
         }
 
+        /* Inicialização ao carregar a página */
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(type, 500);
             animateDVDLogo();
@@ -158,6 +200,7 @@
             });
         });
 
+        /* Verificação do link e redirecionamento para o WhatsApp */
         function checkLink() {
             const input = document.getElementById('hotmart-link').value;
             const errorMessage = document.getElementById('error-message');
@@ -175,6 +218,7 @@
             }
         }
 
+        /* Animação de movimento do logotipo na tela */
         function animateDVDLogo() {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
