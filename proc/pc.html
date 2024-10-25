@@ -76,7 +76,7 @@
             color: white;
             margin-top: 10px;
             font-weight: bold;
-            display: none;
+            display: none; /* Inicialmente escondido */
             text-align: center; /* Centraliza o texto */
         }
         #dvd-logo {
@@ -125,64 +125,30 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(type, 500);
-            animateDVDLogo();
         });
 
         function checkLink() {
             const input = document.getElementById('hotmart-link').value;
             const errorMessage = document.getElementById('error-message');
             const hotmartLinkPattern = /^https:\/\/(pay|payment)\.hotmart\.com\/(\w+)/;
-
+            
             if (hotmartLinkPattern.test(input)) {
                 const productCode = input.match(hotmartLinkPattern)[2];
                 const whatsappNumber = '5543991228540';
                 const whatsappMessage = `Consulte o Produto Oculto: ${productCode}`;
                 const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
-
+                
                 window.open(whatsappUrl, '_blank');
             } else {
-                errorMessage.style.display = 'block';
+                errorMessage.style.display = 'block'; // Mostra a mensagem de erro
             }
         }
 
-        // Esconde a mensagem de erro quando o input ou botão é clicado
         const hotmartInput = document.getElementById('hotmart-link');
-        hotmartInput.addEventListener('focus', hideErrorMessage);
-        document.querySelector('button').addEventListener('click', hideErrorMessage);
-
-        function hideErrorMessage() {
+        hotmartInput.addEventListener('focus', () => {
             const errorMessage = document.getElementById('error-message');
-            errorMessage.style.display = 'none';
-        }
-
-        function animateDVDLogo() {
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
-            const logoWidth = dvdLogo.clientWidth;
-            const logoHeight = dvdLogo.clientHeight;
-            let x = 0;
-            let y = 0;
-            let dx = 1;
-            let dy = 1;
-
-            function moveLogo() {
-                x += dx;
-                y += dy;
-                dvdLogo.style.left = x + "px";
-                dvdLogo.style.top = y + "px";
-
-                if (x + logoWidth >= screenWidth || x <= 0) {
-                    dx = -dx;
-                }
-                if (y + logoHeight >= screenHeight || y <= 0) {
-                    dy = -dy;
-                }
-
-                requestAnimationFrame(moveLogo);
-            }
-
-            moveLogo();
-        }
+            errorMessage.style.display = 'none'; // Esconde a mensagem de erro ao clicar no input
+        });
     </script>
 </body>
 </html>
