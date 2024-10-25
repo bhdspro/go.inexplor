@@ -76,7 +76,7 @@
     <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
     <h1>🔥 Afilie-se ao <span id="typing-text"></span> oculto da Hotmart</h1>
     <div class="input-container">
-        <input type="text" id="hotmart-link" placeholder="🔗 Cole aqui o link do checkout" />
+        <input type="text" id="hotmart-link" placeholder="🌐 Cole aqui o link do checkout" />
         <button onclick="checkLink()">
             <span style="font-size: 24px;">➔</span>
         </button>
@@ -119,7 +119,7 @@
             if (hotmartLinkPattern.test(input)) {
                 const productCode = input.match(hotmartLinkPattern)[2];
                 const whatsappNumber = '5543991228540';
-                const whatsappMessage = `Consulte o Produto Oculto Inexplorado: ${productCode}`;
+                const whatsappMessage = `Consulte o Produto Oculto: ${productCode}`;
                 const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
                 
                 window.open(whatsappUrl, '_blank');
