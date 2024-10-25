@@ -17,16 +17,16 @@
             height: 100vh;
             margin: 0;
             color: white;
-            overflow: hidden;
-            position: relative;
+            overflow: hidden; /* Adicionado para esconder a imagem fora da tela */
+            position: relative; /* Adicionado para posicionar a imagem absolutamente */
         }
         h1 {
             color: white;
             text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52;
-            margin-bottom: 10px;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
+            margin-bottom: 10px; /* Diminuir o espaçamento entre o título e o campo */
+            margin-top: 0; /* Remover a margem superior */
+            display: flex; /* Adicionado */
+            align-items: center; /* Adicionado */
         }
         .typing {
             border-right: 2px solid #191c1f;
@@ -34,7 +34,7 @@
             overflow: hidden;
             display: inline-block;
             animation: blink-caret 0.75s step-end infinite;
-            margin: 0 5px;
+            margin: 0 5px; /* Adicionado */
         }
         @keyframes blink-caret {
             50% {
@@ -44,17 +44,17 @@
         .input-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Centraliza horizontalmente */
             margin-top: 10px;
-            width: 100%;
+            width: 100%; /* O contêiner ocupa toda a largura da página */
         }
         input {
             border: 2px solid #191c1f;
-            border-radius: 25px;
+            border-radius: 25px; /* Bordas mais arredondadas */
             padding: 10px;
             font-size: 16px;
-            width: 70%;
-            max-width: 500px;
+            width: 70%; /* A largura será 70% da tela */
+            max-width: 500px; /* Limita a largura máxima */
             margin-right: 10px;
         }
         button {
@@ -75,15 +75,14 @@
         .error-message {
             color: white;
             margin-top: 10px;
-            font-weight: bold;
-            display: none; /* Inicialmente escondido */
-            text-align: center; /* Centraliza o texto */
+            font-weight: bold; /* Texto em negrito */
+            display: none;
         }
         #dvd-logo {
             position: absolute;
-            width: 100px;
-            height: auto;
-            pointer-events: none;
+            width: 100px; /* Largura da imagem */
+            height: auto; /* Altura será ajustada automaticamente */
+            pointer-events: none; /* Evita que a imagem seja clicada */
         }
     </style>
 </head>
@@ -105,6 +104,7 @@
         let isDeleting = false;
         const typingElement = document.getElementById("typing-text");
         const dvdLogo = document.getElementById("dvd-logo");
+        const hotmartInput = document.getElementById('hotmart-link'); // Seleciona o input
 
         function type() {
             currentWord = words[wordIndex];
@@ -120,11 +120,12 @@
                     isDeleting = true;
                 }
             }
-            setTimeout(type, isDeleting ? 150 : 300);
+            setTimeout(type, isDeleting ? 150 : 300); // Velocidade ajustada para 1000ms
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(type, 500);
+            animateDVDLogo(); // Inicia a animação do logo DVD
         });
 
         function checkLink() {
@@ -140,15 +141,44 @@
                 
                 window.open(whatsappUrl, '_blank');
             } else {
-                errorMessage.style.display = 'block'; // Mostra a mensagem de erro
+                errorMessage.style.display = 'block';
             }
         }
 
-        const hotmartInput = document.getElementById('hotmart-link');
+        // Adiciona o evento de focus para ocultar a mensagem de erro
         hotmartInput.addEventListener('focus', () => {
             const errorMessage = document.getElementById('error-message');
-            errorMessage.style.display = 'none'; // Esconde a mensagem de erro ao clicar no input
+            errorMessage.style.display = 'none';
         });
+
+        function animateDVDLogo() {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const logoWidth = dvdLogo.clientWidth;
+            const logoHeight = dvdLogo.clientHeight;
+            let x = 0;
+            let y = 0;
+            let dx = 1;
+            let dy = 1;
+
+            function moveLogo() {
+                x += dx;
+                y += dy;
+                dvdLogo.style.left = x + "px";
+                dvdLogo.style.top = y + "px";
+
+                if (x + logoWidth >= screenWidth || x <= 0) {
+                    dx = -dx;
+                }
+                if (y + logoHeight >= screenHeight || y <= 0) {
+                    dy = -dy;
+                }
+
+                requestAnimationFrame(moveLogo);
+            }
+
+            moveLogo();
+        }
     </script>
 </body>
 </html>
