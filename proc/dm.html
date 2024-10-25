@@ -60,6 +60,7 @@
             margin-top: 10px;
             font-weight: bold;
             display: none;
+            text-align: center; /* Centraliza o texto */
         }
         #dvd-logo {
             position: absolute;
@@ -75,7 +76,7 @@
     <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
     <h1>🔥 Afilie-se ao <span id="typing-text"></span> oculto da Hotmart</h1>
     <div class="input-container">
-        <input type="text" id="hotmart-link" placeholder="Cole aqui o link que você copiou na página de pagamento da Hotmart" />
+        <input type="text" id="hotmart-link" placeholder="Cole o link do checkout" />
         <button onclick="checkLink()">
             <span style="font-size: 24px;">➔</span>
         </button>
@@ -126,6 +127,13 @@
                 errorMessage.style.display = 'block';
             }
         }
+
+        // Esconde a mensagem de erro quando o input recebe foco
+        const hotmartInput = document.getElementById('hotmart-link');
+        hotmartInput.addEventListener('focus', () => {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = 'none';
+        });
     </script>
 </body>
 </html>
