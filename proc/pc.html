@@ -17,16 +17,16 @@
             height: 100vh;
             margin: 0;
             color: white;
-            overflow: hidden; /* Adicionado para esconder a imagem fora da tela */
-            position: relative; /* Adicionado para posicionar a imagem absolutamente */
+            overflow: hidden;
+            position: relative;
         }
         h1 {
             color: white;
             text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52;
-            margin-bottom: 10px; /* Diminuir o espaçamento entre o título e o campo */
-            margin-top: 0; /* Remover a margem superior */
-            display: flex; /* Adicionado */
-            align-items: center; /* Adicionado */
+            margin-bottom: 10px;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
         }
         .typing {
             border-right: 2px solid #191c1f;
@@ -34,7 +34,7 @@
             overflow: hidden;
             display: inline-block;
             animation: blink-caret 0.75s step-end infinite;
-            margin: 0 5px; /* Adicionado */
+            margin: 0 5px;
         }
         @keyframes blink-caret {
             50% {
@@ -44,17 +44,17 @@
         .input-container {
             display: flex;
             align-items: center;
-            justify-content: center; /* Centraliza horizontalmente */
+            justify-content: center;
             margin-top: 10px;
-            width: 100%; /* O contêiner ocupa toda a largura da página */
+            width: 100%;
         }
         input {
             border: 2px solid #191c1f;
-            border-radius: 25px; /* Bordas mais arredondadas */
+            border-radius: 25px;
             padding: 10px;
             font-size: 16px;
-            width: 70%; /* A largura será 70% da tela */
-            max-width: 500px; /* Limita a largura máxima */
+            width: 70%;
+            max-width: 500px;
             margin-right: 10px;
         }
         button {
@@ -75,14 +75,33 @@
         .error-message {
             color: white;
             margin-top: 10px;
-            font-weight: bold; /* Texto em negrito */
+            font-weight: bold;
             display: none;
         }
         #dvd-logo {
             position: absolute;
-            width: 100px; /* Largura da imagem */
-            height: auto; /* Altura será ajustada automaticamente */
-            pointer-events: none; /* Evita que a imagem seja clicada */
+            width: 100px;
+            height: auto;
+            pointer-events: none;
+        }
+        .hidden-product-button {
+            background-color: white;
+            border: 2px solid #191c1f;
+            border-radius: 25px;
+            color: #191c1f;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hidden-product-button:hover {
+            background-color: #f04e23;
+            color: white;
         }
     </style>
 </head>
@@ -95,6 +114,9 @@
         </button>
     </div>
     <div class="error-message" id="error-message">🚨 Ops! O link correto deve começar com https://pay.hotmart.com/...</div>
+    <button class="hidden-product-button" onclick="window.location.href='https://inexplor.com'">
+        Quero Produto Oculto
+    </button>
     <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
     <script>
         const words = ["produto", "lançamento"];
@@ -119,12 +141,12 @@
                     isDeleting = true;
                 }
             }
-            setTimeout(type, isDeleting ? 150 : 300); // Velocidade ajustada para 1000ms
+            setTimeout(type, isDeleting ? 150 : 300);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(type, 500);
-            animateDVDLogo(); // Inicia a animação do logo DVD
+            animateDVDLogo();
         });
 
         function checkLink() {
