@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta Proc | Inexplor</title>
+    <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            background-color: #f04e23;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            overflow: hidden; /* Adicionado para esconder a imagem fora da tela */
+            position: relative; /* Adicionado para posicionar a imagem absolutamente */
+        }
+        h1 {
+            color: white;
+            text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52;
+            margin-bottom: 10px; /* Diminuir o espaçamento entre o título e o campo */
+            margin-top: 0; /* Remover a margem superior */
+            display: flex; /* Adicionado */
+            align-items: center; /* Adicionado */
+        }
+        .typing {
+            border-right: 2px solid #191c1f;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blink-caret 0.75s step-end infinite;
+            margin: 0 5px; /* Adicionado */
+        }
+        @keyframes blink-caret {
+            50% {
+                border-color: transparent;
+            }
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        input {
+            border: 2px solid #191c1f;
+            border-radius: 25px; /* Bordas mais arredondadas */
+            padding: 10px;
+            font-size: 16px;
+            width: 500px;
+            margin-right: 10px;
+        }
+        button {
+            background-color: white;
+            border: 2px solid #191c1f;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #f04e23;
+            color: white;
+        }
+        .error-message {
+            color: white;
+            margin-top: 10px;
+            font-weight: bold; /* Texto em negrito */
+            display: none;
+        }
+        #dvd-logo {
+            position: absolute;
+            width: 100px; /* Largura da imagem */
+            height: auto; /* Altura será ajustada automaticamente */
+            pointer-events: none; /* Evita que a imagem seja clicada */
+        }
+    </style>
+</head>
+<body>
+    <h1>Consulte o <span id="typing-text" class="typing"></span> inexplorado!</h1>
+    <div class="input-container">
+        <input type="text" id="hotmart-link" placeholder="https://pay.hotmart.com/..." />
+        <button onclick="checkLink()">
+            <span style="font-size: 24px;">➔</span>
+        </button>
+    </div>
+    <div class="error-message" id="error-message">Forneça o link de checkout da Hotmart</div>
+    <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
+    <script>
+        const words = ["produto oculto", "lançamento"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let currentWord = "";
+        let isDeleting = false;
+        const typingElement = document.getElementById("typing-text");
+        const dvdLogo = document.getElementById("dvd-logo");
+
+        function type() {
+            currentWord = words[wordIndex];
+            if (isDeleting) {
+                typingElement.innerText = currentWord.substring(0, charIndex--);
+                if (charIndex < 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+            } else {
+                typingElement.innerText = currentWord.substring(0, charIndex++);
+                if (charIndex > currentWord.length) {
+                    isDeleting = true;
+                }
+            }
+            setTimeout(type, isDeleting ? 150 : 300); // Velocidade ajustada para 1000ms
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(type, 500);
+            animateDVDLogo(); // Inicia a animação do logo DVD
+        });
+
+        function checkLink() {
+            const input = document.getElementById('hotmart-link').value;
+            const errorMessage = document.getElementById('error-message');
+            const hotmartLinkPattern = /^https:\/\/(pay|payment)\.hotmart\.com\/(\w+)/;
+            
+            if (hotmartLinkPattern.test(input)) {
+                const productCode = input.match(hotmartLinkPattern)[2];
+                const whatsappNumber = '5543991228540';
+                const whatsappMessage = `Consulte o Produto Oculto Inexplorado: ${productCode}`;
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+                
+                window.open(whatsappUrl, '_blank');
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function animateDVDLogo() {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const logoWidth = dvdLogo.clientWidth;
+            const logoHeight = dvdLogo.clientHeight;
+            let x = 0;
+            let y = 0;
+            let dx = 1;
+            let dy = 1;
+
+            function moveLogo() {
+                x += dx;
+                y += dy;
+                dvdLogo.style.left = x + "px";
+                dvdLogo.style.top = y + "px";
+
+                if (x + logoWidth >= screenWidth || x <= 0) {
+                    dx = -dx;
+                }
+                if (y + logoHeight >= screenHeight || y <= 0) {
+                    dy = -dy;
+                }
+
+                requestAnimationFrame(moveLogo);
+            }
+
+            moveLogo();
+        }
+    </script>
+</body>
+</html>
