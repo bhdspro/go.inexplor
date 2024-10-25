@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultoria Inexplor</title>
+    <title>Ferramenta Proc | Inexplor</title>
     <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -44,17 +44,14 @@
         .input-container {
             display: flex;
             align-items: center;
-            justify-content: center; /* Centraliza horizontalmente */
             margin-top: 10px;
-            width: 100%; /* O contêiner ocupa toda a largura da página */
         }
         input {
             border: 2px solid #191c1f;
             border-radius: 25px; /* Bordas mais arredondadas */
             padding: 10px;
             font-size: 16px;
-            width: 70%; /* A largura será 70% da tela */
-            max-width: 500px; /* Limita a largura máxima */
+            width: 500px;
             margin-right: 10px;
         }
         button {
@@ -97,7 +94,7 @@
     <div class="error-message" id="error-message">🚨 Ops! O link correto deve começar com https://pay.hotmart.com/...</div>
     <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
     <script>
-        const words = ["produto", "lançamento"];
+        const words = ["produto oculto", "lançamento"];
         let wordIndex = 0;
         let charIndex = 0;
         let currentWord = "";
@@ -145,12 +142,6 @@
             }
         }
 
-        // Adiciona o evento de focus para ocultar a mensagem de erro
-        hotmartInput.addEventListener('focus', () => {
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.style.display = 'none';
-        });
-
         function animateDVDLogo() {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
@@ -179,6 +170,11 @@
 
             moveLogo();
         }
+
+        hotmartInput.addEventListener('focus', () => {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = 'none';
+        });
     </script>
 </body>
 </html>
