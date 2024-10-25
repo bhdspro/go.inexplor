@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferramenta Proc | Inexplor</title>
+    <title>Proc | Inexplor</title>
     <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -84,14 +84,14 @@
     </style>
 </head>
 <body>
-    <h1>Consulte o <span id="typing-text" class="typing"></span> inexplorado!</h1>
+    <h1>Consulte o <span id="typing-text" class="typing"></span> oculto!</h1>
     <div class="input-container">
         <input type="text" id="hotmart-link" placeholder="https://pay.hotmart.com/..." />
         <button onclick="checkLink()">
             <span style="font-size: 24px;">➔</span>
         </button>
     </div>
-    <div class="error-message" id="error-message">Forneça o link de checkout da Hotmart</div>
+    <div class="error-message" id="error-message">Cole o link da página de pagamento da Hotmart</div>
     <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
     <script>
         const words = ["produto oculto", "lançamento"];
@@ -132,7 +132,7 @@
             if (hotmartLinkPattern.test(input)) {
                 const productCode = input.match(hotmartLinkPattern)[2];
                 const whatsappNumber = '5543991228540';
-                const whatsappMessage = `Consulte o Produto Oculto Inexplorado: ${productCode}`;
+                const whatsappMessage = `Consulte o Produto Oculto: ${productCode}`;
                 const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
                 
                 window.open(whatsappUrl, '_blank');
