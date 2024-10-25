@@ -145,6 +145,11 @@
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(type, 500);
             animateDVDLogo(); // Inicia a animação do logo DVD
+
+            // Adiciona o evento para ocultar a mensagem de erro ao focar no input
+            document.getElementById('hotmart-link').addEventListener('focus', () => {
+                document.getElementById('error-message').style.display = 'none';
+            });
         });
 
         function checkLink() {
