@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferramenta Proc | Inexplor</title>
+    <title>Consultoria Inexplor</title>
     <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -44,14 +44,17 @@
         .input-container {
             display: flex;
             align-items: center;
+            justify-content: center; /* Centraliza horizontalmente */
             margin-top: 10px;
+            width: 100%; /* O contêiner ocupa toda a largura da página */
         }
         input {
             border: 2px solid #191c1f;
             border-radius: 25px; /* Bordas mais arredondadas */
             padding: 10px;
             font-size: 16px;
-            width: 500px;
+            width: 70%; /* A largura será 70% da tela */
+            max-width: 500px; /* Limita a largura máxima */
             margin-right: 10px;
         }
         button {
@@ -81,10 +84,13 @@
             height: auto; /* Altura será ajustada automaticamente */
             pointer-events: none; /* Evita que a imagem seja clicada */
         }
+        a {
+            text-decoration: none; /* Remove o sublinhado do link */
+        }
     </style>
 </head>
 <body>
-    <h1>🔥 Afilie-se ao <span id="typing-text" class="typing"></span> oculto da Hotmart</h1>
+    <h1><span id="typing-text" class="typing"></span> oculto da Hotmart</h1>
     <div class="input-container">
         <input type="text" id="hotmart-link" placeholder="🌐 Cole o link da página de pagamento da Hotmart que você copiou" />
         <button onclick="checkLink()">
@@ -92,16 +98,17 @@
         </button>
     </div>
     <div class="error-message" id="error-message">🚨 Ops! O link correto deve começar com https://pay.hotmart.com/...</div>
-    <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
+    <a href="https://go.inexplor.com/consultoria" target="_blank" id="link-image">
+        <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
+    </a>
     <script>
-        const words = ["produto oculto", "lançamento"];
+        const words = ["produto", "lançamento"];
         let wordIndex = 0;
         let charIndex = 0;
         let currentWord = "";
         let isDeleting = false;
         const typingElement = document.getElementById("typing-text");
         const dvdLogo = document.getElementById("dvd-logo");
-        const hotmartInput = document.getElementById('hotmart-link'); // Seleciona o input
 
         function type() {
             currentWord = words[wordIndex];
@@ -170,11 +177,6 @@
 
             moveLogo();
         }
-
-        hotmartInput.addEventListener('focus', () => {
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.style.display = 'none';
-        });
     </script>
 </body>
 </html>
