@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionamento</title>
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sites = {
+                'htm': 'https://pay.hotmart.com/O84969640O?off=k3qhq6hw&checkoutMode=10',
+                'kwf': 'https://pay.kiwify.com.br/0XJ7aSq',
+                'kvn': 'https://pay.hotmart.com/O84969640O?off=k3qhq6hw&checkoutMode=10',
+                'tco': 'https://pay.hotmart.com/O84969640O?off=k3qhq6hw&checkoutMode=10',
+                'edz': 'https://pay.hotmart.com/O84969640O?off=k3qhq6hw&checkoutMode=10'
+            };
+            
+            let redirected = false;
+            for (const [key, url] of Object.entries(sites)) {
+                if (urlParams.has(key)) {
+                    window.location.href = url;
+                    redirected = true;
+                    break;
+                }
+            }
+
+            if (!redirected) {
+                window.location.href = 'https://pay.kiwify.com.br/0XJ7aSq';
+            }
+        })();
+    </script>
+</head>
+<body>
+</body>
+</html>
