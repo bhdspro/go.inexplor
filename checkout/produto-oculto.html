@@ -1,27 +1,35 @@
-(function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    // Mapear os parâmetros para seus respectivos sites
-    const sites = {
-        'htm': 'https://hotmart.com',
-        'kwf': 'https://kiwify.com',
-        'kvn': 'https://kirvano.com',
-        'tco': 'https://ticto.com',
-        'edz': 'https://eduzz.com'
-    };
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionamento</title>
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sites = {
+                'htm': 'https://hotmart.com',
+                'kwf': 'https://kiwify.com',
+                'kvn': 'https://kirvano.com',
+                'tco': 'https://ticto.com',
+                'edz': 'https://eduzz.com'
+            };
+            
+            let redirected = false;
+            for (const [key, url] of Object.entries(sites)) {
+                if (urlParams.has(key)) {
+                    window.location.href = url;
+                    redirected = true;
+                    break;
+                }
+            }
 
-    // Verificar se algum dos parâmetros especificados está na URL
-    let redirected = false;
-    for (const [key, url] of Object.entries(sites)) {
-        if (urlParams.has(key)) {
-            window.location.href = url; // Redirecionamento rápido
-            redirected = true;
-            break;
-        }
-    }
-
-    // Se nenhum parâmetro for encontrado, redirecionar para a URL padrão
-    if (!redirected) {
-        window.location.href = 'https://exemplo.com'; // URL padrão
-    }
-})();
+            if (!redirected) {
+                window.location.href = 'https://exemplo.com';
+            }
+        })();
+    </script>
+</head>
+<body>
+</body>
+</html>
