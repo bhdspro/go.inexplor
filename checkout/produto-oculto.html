@@ -6,28 +6,19 @@
     <title>Redirecionamento</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Função para obter os parâmetros da URL
-            function getQueryParam(param) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(param);
-            }
-
-            // Mapeamento dos parâmetros para URLs
+            // Mapeamento dos links baseado na página anterior
+            const referrer = document.referrer;
             const links = {
-                'htm': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
-                'kwf': 'https://pay.kiwify.com.br/Azj2vJ2',
-                'kvn': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
-                'tco': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
-                'edz': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10'
+                'https://inexplor.com?kwf': 'https://pay.kiwify.com.br/Azj2vJ2',
+                'https://inexplor.com?htm': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
+                'https://inexplor.com?kvn': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
+                'https://inexplor.com?tco': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
+                'https://inexplor.com?edz': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10'
             };
 
-            // Obtém o parâmetro 'previousPage'
-            const previousPage = getQueryParam('previousPage');
-            
-            // Verifica se o parâmetro é válido e redireciona
-            if (previousPage && links[previousPage]) {
-                // Redireciona para a URL correspondente
-                window.location.href = links[previousPage];
+            // Verifica se o referer está mapeado e redireciona
+            if (links[referrer]) {
+                window.location.href = links[referrer];
             }
         });
     </script>
