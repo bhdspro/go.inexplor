@@ -1,0 +1,27 @@
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Mapear os parâmetros para seus respectivos sites
+    const sites = {
+        'htm': 'https://hotmart.com',
+        'kwf': 'https://kiwify.com',
+        'kvn': 'https://kirvano.com',
+        'tco': 'https://ticto.com',
+        'edz': 'https://eduzz.com'
+    };
+
+    // Verificar se algum dos parâmetros especificados está na URL
+    let redirected = false;
+    for (const [key, url] of Object.entries(sites)) {
+        if (urlParams.has(key)) {
+            window.location.href = url; // Redirecionamento rápido
+            redirected = true;
+            break;
+        }
+    }
+
+    // Se nenhum parâmetro for encontrado, redirecionar para a URL padrão
+    if (!redirected) {
+        window.location.href = 'https://exemplo.com'; // URL padrão
+    }
+})();
