@@ -1,43 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionamento</title>
     <script>
-       // Função para extrair o domínio principal
-function getMainDomain(url) {
-    var anchor = document.createElement('a');
-    anchor.href = url;
-    return anchor.hostname;
-}
+        document.addEventListener('DOMContentLoaded', function () {
+            // Função para obter os parâmetros da URL
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
 
-// Função para extrair os parâmetros da URL
-function getUrlParameters(url) {
-    var anchor = document.createElement('a');
-    anchor.href = url;
+            // Mapeamento dos parâmetros para URLs
+            const links = {
+                'htm': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
+                'kwf': 'https://pay.kiwify.com.br/Azj2vJ2',
+                'kvn': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
+                'tco': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10',
+                'edz': 'https://pay.hotmart.com/O84969640O?off=ckwz0w18&checkoutMode=10'
+            };
 
-    // Cria um objeto URLSearchParams para facilitar a manipulação
-    return new URLSearchParams(anchor.search);
-}
-
-// Obtém o link da página anterior
-var previousPageLink = document.referrer;
-
-// Extrai o domínio principal
-var mainDomain = getMainDomain(previousPageLink);
-
-// Extrai os parâmetros da URL da página anterior
-var urlParams = getUrlParameters(previousPageLink);
-
-// Armazena o domínio e os parâmetros no armazenamento local
-localStorage.setItem("previousDomain", mainDomain);
-localStorage.setItem("previousParams", urlParams.toString());
-
-// Exibe o resultado no console
-console.log("Domínio da página anterior: ", mainDomain);
-console.log("Parâmetros da página anterior: ", urlParams.toString());
-
+            // Obtém o parâmetro 'previousPage'
+            const previousPage = getQueryParam('previousPage');
+            
+            // Verifica se o parâmetro é válido e redireciona
+            if (previousPage && links[previousPage]) {
+                // Redireciona para a URL correspondente
+                window.location.href = links[previousPage];
+            }
+        });
     </script>
 </head>
 <body>
