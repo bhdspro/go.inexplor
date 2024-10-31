@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionamento</title>
     <script>
-        // Função para extrair o domínio principal
+       // Função para extrair o domínio principal
 function getMainDomain(url) {
-    // Cria um elemento de âncora para usar a funcionalidade de URL
+    var anchor = document.createElement('a');
+    anchor.href = url;
+    return anchor.hostname;
+}
+
+// Função para extrair os parâmetros da URL
+function getUrlParameters(url) {
     var anchor = document.createElement('a');
     anchor.href = url;
 
-    // Retorna o domínio principal (ex.: inexplor.com)
-    return anchor.hostname;
+    // Cria um objeto URLSearchParams para facilitar a manipulação
+    return new URLSearchParams(anchor.search);
 }
 
 // Obtém o link da página anterior
@@ -21,11 +27,16 @@ var previousPageLink = document.referrer;
 // Extrai o domínio principal
 var mainDomain = getMainDomain(previousPageLink);
 
-// Exibe o domínio principal no console
-console.log("Domínio da página anterior: ", mainDomain);
+// Extrai os parâmetros da URL da página anterior
+var urlParams = getUrlParameters(previousPageLink);
 
-// Armazena o domínio no armazenamento local
+// Armazena o domínio e os parâmetros no armazenamento local
 localStorage.setItem("previousDomain", mainDomain);
+localStorage.setItem("previousParams", urlParams.toString());
+
+// Exibe o resultado no console
+console.log("Domínio da página anterior: ", mainDomain);
+console.log("Parâmetros da página anterior: ", urlParams.toString());
 
     </script>
 </head>
