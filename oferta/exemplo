@@ -6,7 +6,7 @@
     <title>Redirecionamento</title>
     <script>
         function redirecionar() { // J0 - F1 - M2 - A3 - M4 - J5 - J6 - A7 - S8 - O9 - N10 - D11
-            var dataLimite = new Date(2024, 2, 10, 12, 0, 0); // 10 de março de 2024 às 12:00
+            var dataLimite = new Date(2024, 2, 9, 12, 30, 0); // 10 de março de 2024 às 12:30
             var agora = new Date();
             var linkDestino = "https://exemplo.com/antes";
             var linkExpirado = "https://exemplo.com/depois";
