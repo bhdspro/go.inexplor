@@ -11,7 +11,7 @@
                 fetch('https://worldtimeapi.org/api/timezone/America/Sao_Paulo')
                     .then(response => response.json())
                     .then(data => {
-                        const dataServidor = new Date(data.datetime); // Obtém o horário do servidor
+                        const dataServidor = new Date(data.datetime); // Obtém o horário do servidor de Brasília
                         resolve(dataServidor);
                     })
                     .catch(error => {
@@ -22,14 +22,14 @@
 
         function redirecionar() {
             obterHoraServidor().then(agora => {
-                var dataLimite = new Date(Date.UTC(2025, 2, 9, 14, 45, 0)); // 9 de março de 2025 às 13:45 UTC
+                // Defina aqui o horário e data limite desejado para o redirecionamento
+                // Exemplo: 9 de março de 2025 às 14:30 (horário de Brasília)
+                var dataLimite = new Date(2025, 2, 9, 14, 40, 0); // 9 de março de 2025 às 14:30 horário de Brasília
+                
                 var linkDestino = "https://pay.inexplor.com/produto-oculto";
                 var linkExpirado = "https://inexplor.com/expirou";
                 
-                // Ajuste para o horário de Brasília
-                agora.setHours(agora.getHours() - 3); // Subtraí 3 horas para alinhar com o horário de Brasília
-                
-                // Redireciona com base na hora do servidor
+                // Redireciona com base na hora do servidor de Brasília
                 window.location.href = (agora < dataLimite) ? linkDestino : linkExpirado;
             }).catch(error => {
                 console.error('Erro ao obter hora do servidor:', error);
