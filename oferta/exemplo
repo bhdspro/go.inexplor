@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionamento</title>
+    <script>
+        function redirecionar() {
+            var dataLimite = new Date(2024, 2, 10, 12, 0, 0); // 10 de março de 2024 às 12:00
+            var agora = new Date();
+            var linkDestino = "https://exemplo.com/antes";
+            var linkExpirado = "https://exemplo.com/depois";
+            
+            window.location.href = (agora < dataLimite) ? linkDestino : linkExpirado;
+        }
+        
+        window.onload = redirecionar;
+    </script>
+</head>
+<body>
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=https://exemplo.com/depois">
+    </noscript>
+</body>
+</html>
